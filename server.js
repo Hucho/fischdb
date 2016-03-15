@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//commentar
+
 //connect to db
 db = mongoose.createConnection('localhost','fische');
 db.on('error', console.error.bind(console,'connection error:'));
