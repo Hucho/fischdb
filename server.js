@@ -47,7 +47,7 @@ User.find({}, function(err,docs){
 
 });
 
-//test gruppieren
+//test nach Art filtern
 app.get('/Aale', function(req,res){
 
 	User.aggregate([{"$match": {Art: "Aal"}}], function(err, docs){
