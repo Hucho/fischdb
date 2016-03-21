@@ -26,10 +26,10 @@ process.on('SIGINT', function(){
 //create a schema
 var userSchema = new Schema (
 	{ 
-		anzahl: Number,
-		art: String,
-		gewicht: Number,
-		strecken_id: Number,
+		Anzahl: Number,
+		Art: String,
+		Gewicht: Number,
+		Strecken_ID: Number,
 	}, 	{collection: 'kkr'});
 
 //model
@@ -50,13 +50,10 @@ User.find({}, function(err,docs){
 //test gruppieren
 app.get('/gesamt', function(req,res){
 
-	User.find({}, function(err,docs){
+	User.aggregate([{"$match": {Art: "Aal"}}], function(err, docs){
 
-			docs.forEach(function(docs){
-
-				res.json(docs);
-			});
-
+			if(err){console.log(err);}
+			else {res.json(docs);}
 	});
 
 });
