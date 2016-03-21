@@ -48,13 +48,47 @@ User.find({}, function(err,docs){
 });
 
 //test gruppieren
-app.get('/gesamt', function(req,res){
+app.get('/Aale', function(req,res){
 
 	User.aggregate([{"$match": {Art: "Aal"}}], function(err, docs){
 
 			if(err){console.log(err);}
 			else {res.json(docs);}
 	});
+
+});
+
+//test gruppieren
+app.get('/gesamt', function(req,res){
+
+	User.aggregate([{$group: { 
+			_id: "$Art",
+			Anzahl: {$sum: "$Anzahl"}
+		}
+
+		}],	function(err,docs){
+
+		if(err){console.log(err);}
+		else {res.json(docs);}	
+
+	});
+
+});
+
+//neuen Fisch speichern
+
+var neuerFisch = new User ({
+
+	Anzahl: 1,
+	Art: "Wahoo",
+	Gewicht: 25000,
+	Strecken_ID: 10,
+});
+
+neuerFisch.save(function(err){
+
+	if(err) {console.log(err);}
+	else {console.log(neuerFisch);}
 
 });
 
