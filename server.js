@@ -58,8 +58,25 @@ app.get('/Aale', function(req,res){
 
 });
 
+// //test gruppieren
+// app.get('/gesamtergebnis', function(req,res){
+
+// 	User.aggregate([{$group: { 
+// 			_id: "$Art",
+// 			Anzahl: {$sum: "$Anzahl"}
+// 		}
+
+// 		}],	function(err,docs){
+
+// 		if(err){console.log(err);}
+// 		else {res.json(docs);}	
+
+// 	});
+
+// });
+
 //test gruppieren
-app.get('/gesamt', function(req,res){
+app.get('/gesamtergebnis', function(req,res){
 
 	User.aggregate([{$group: { 
 			_id: "$Art",
@@ -75,22 +92,23 @@ app.get('/gesamt', function(req,res){
 
 });
 
+
 //neuen Fisch speichern
 
-var neuerFisch = new User ({
+// var neuerFisch = new User ({
 
-	Anzahl: 1,
-	Art: "Wahoo",
-	Gewicht: 25000,
-	Strecken_ID: 10,
-});
+// 	Anzahl: 1,
+// 	Art: "Wahoo",
+// 	Gewicht: 25000,
+// 	Strecken_ID: 10,
+// });
 
-neuerFisch.save(function(err){
+// neuerFisch.save(function(err){
 
-	if(err) {console.log(err);}
-	else {console.log(neuerFisch);}
+// 	if(err) {console.log(err);}
+// 	else {console.log(neuerFisch);}
 
-});
+// });
 
 
 
