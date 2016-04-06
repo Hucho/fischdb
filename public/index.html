@@ -1,9 +1,11 @@
 <!doctype html>
-<html ng-app>
+<html ng-app = "myApp">
 
 <title>BNGF Fischdatenbank</title>
 
 <head>
+
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -13,20 +15,44 @@
 	
 
 </head>
+
 <body>
+
 <div class="container" ng-controller ="AppCtrl">
 
 <h1>Gesamtergebnis</h1>
 
-<class="" ng-repeat="fisch in gesamtergebnis">
-<>{fische.art}
-<>{fische.laenge}
-<>
 
-<srcipt src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></srcipt>
-<script src="controllers/controller.js"></script>
+	<table class="table">
+	
+		<thead>
+			<tr>
+				<th>Art</th>
+				<th>Anzahl</th>
+				<th>Mittl. Länge [cm]</th>
+				<th>Gewicht [Kilo]</th>
+				
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="total in totals track by $index">
+				<td>{{total._id}}</td>
+				<td>{{total.Anzahl}}</td>
+				<td>{{total.Laenge_Avg | number:2}}</td>
+				<td>{{(total.Gewicht/1000) | number:2}}</td>
+			</tr>	
+		</tbody>
+	
+	
+	</table>
 
-</div>
+</div>	
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+
+<script src="controller/controller.js"></script>
+
 </body>
 
 </html>

@@ -3,8 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
-//Deleted
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
 //connect to db
 var db = mongoose.createConnection('localhost','fische');
@@ -14,7 +14,6 @@ db.on('connected',function(){
 });
 
 //disconnect from mongodb when node stops
-
 process.on('SIGINT', function(){
 	mongoose.connection.close(function(){
 		console.log("Mongoose default connection terminated by app termination!");
@@ -35,28 +34,51 @@ var userSchema = new Schema (
 //model
 var User = db.model('User', userSchema);
 
+app.get('/totals', function(req,res){
 
-//alle Fische
-app.get('/fische', function(req,res){
+	User.aggregate([{$group: { 
+			_id: "$Art",
+			Anzahl: {$sum: "$Anzahl"},
+			Laenge_Avg: {$avg: "$Laenge"},
+			Gewicht:{$sum: "$Gewicht"}
 
-User.find({}, function(err,docs){
-	res.json(docs)
-	console.log("Alle Fische wurden versendet");
+		}
 
-});
+		}],	function(err,docs){
 
-});
+		if(err){console.log(err);}
+		else res.json(docs)	
 
-//test nach Art filtern
-app.get('/Aale', function(req,res){
-
-	User.aggregate([{"$match": {Art: "Aal"}}], function(err, docs){
-
-			if(err){console.log(err);}
-			else {res.json(docs);}
 	});
 
 });
+
+
+
+
+//alle Fische
+// app.get('/fische', function(req,res){
+
+// User.find({}, function(err,docs){
+// 	res.json(docs)
+// 	console.log("Alle Fische wurden versendet");
+
+//test gruppieren
+
+// });
+
+// });
+
+//test nach Art filtern
+// app.get('/Aale', function(req,res){
+
+// 	User.aggregate([{"$match": {Art: "Aal"}}], function(err, docs){
+
+// 			if(err){console.log(err);}
+// 			else {res.json(docs);}
+// 	});
+
+// });
 
 // //test gruppieren
 // app.get('/gesamtergebnis', function(req,res){
@@ -75,22 +97,7 @@ app.get('/Aale', function(req,res){
 
 // });
 
-//test gruppieren
-app.get('/gesamtergebnis', function(req,res){
 
-	User.aggregate([{$group: { 
-			_id: "$Art",
-			Anzahl: {$sum: "$Anzahl"}
-		}
-
-		}],	function(err,docs){
-
-		if(err){console.log(err);}
-		else {res.json(docs);}	
-
-	});
-
-});
 
 
 //neuen Fisch speichern
@@ -112,7 +119,7 @@ app.get('/gesamtergebnis', function(req,res){
 
 
 
-app.use(express.static(__dirname + "/public"));
+
 
 app.listen(3000);
 console.log("Server is running on port 3000");
