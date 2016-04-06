@@ -30,6 +30,7 @@
 				<th>Art</th>
 				<th>Anzahl</th>
 				<th>Mittl. Länge [cm]</th>
+				<th>Max. Länge [cm]</th>
 				<th>Gewicht [Kilo]</th>
 				
 			</tr>
@@ -40,6 +41,7 @@
 				<td>{{total._id}}</td>
 				<td>{{total.Anzahl}}</td>
 				<td>{{total.Laenge_Avg | number:2}}</td>
+				<td>{{total.Laenge_Max | number:2}}</td>
 				<td>{{(total.Gewicht/1000) | number:2}}</td>
 			</tr>	
 		</tbody>

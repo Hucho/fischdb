@@ -37,9 +37,11 @@ var User = db.model('User', userSchema);
 app.get('/totals', function(req,res){
 
 	User.aggregate([{$group: { 
+
 			_id: "$Art",
 			Anzahl: {$sum: "$Anzahl"},
 			Laenge_Avg: {$avg: "$Laenge"},
+			Laenge_Max: {$max: "$Laenge"},
 			Gewicht:{$sum: "$Gewicht"}
 
 		}
@@ -47,7 +49,8 @@ app.get('/totals', function(req,res){
 		}],	function(err,docs){
 
 		if(err){console.log(err);}
-		else res.json(docs)	
+		else {res.json(docs);
+			console.log(docs);}	
 
 	});
 
