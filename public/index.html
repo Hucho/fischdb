@@ -1,59 +1,28 @@
 <!doctype html>
-<html ng-app = "myApp">
+<html ng-app="fischApp">
 
 <title>BNGF Fischdatenbank</title>
-
 <head>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"</script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 	
 
 </head>
 
-<body>
+<body ng-controller = "fischCtrl">
 
-<div class="container" ng-controller ="AppCtrl">
+<h1>Test</h1>
 
-<h1>Gesamtergebnis</h1>
+<div class="container">
 
-
-	<table class="table">
-	
-		<thead>
-			<tr>
-				<th>Art</th>
-				<th>Anzahl</th>
-				<th>Mittl. Länge [cm]</th>
-				<th>Max. Länge [cm]</th>
-				<th>Gewicht [Kilo]</th>
-				
-			</tr>
-		</thead>
-		
-		<tbody>
-			<tr ng-repeat="total in totals track by $index">
-				<td>{{total._id}}</td>
-				<td>{{total.Anzahl}}</td>
-				<td>{{total.Laenge_Avg | number:2}}</td>
-				<td>{{total.Laenge_Max | number:2}}</td>
-				<td>{{(total.Gewicht/1000) | number:2}}</td>
-			</tr>	
-		</tbody>
-	
-	
-	</table>
 
 </div>	
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-
-<script src="controller/controller.js"></script>
 
 </body>
 
