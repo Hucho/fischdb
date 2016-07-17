@@ -1,15 +1,18 @@
 
 {
-  "name": "fischApp",
-  "version": "0.0.0",
+  "name": "fishApp",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-	"express": "lastest",
+	"express": "latest",
 	"mongoose": "latest",
 	"body-parser": "latest",
 	"method-override": "latest"
+  },
+  "scripts":{
+    "postinstall": "bower install"
   }
 }

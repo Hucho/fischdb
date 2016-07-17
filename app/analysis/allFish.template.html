@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
+
+      <p>
+        Search:
+        <input ng-model="$ctrl.query" />
+      </p>
+
+      <p>
+        Sort by:
+        <select ng-model="$ctrl.orderProp">
+          <option value="_id">Art</option>
+          <option value="Anzahl">Anzahl</option>
+        </select>
+      </p>
+
+    </div>
+    <div class="col-md-2">
+      <!--Body content-->
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Art</th>
+            <th>Anzahl</th>
+            <th>Mittl. Länge</th>
+            <th>Max. Länge</th>
+            <th>Mittl. Gewicht</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="fish in $ctrl.fishes | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+          <tr>
+            <td>{{fish._id}}</td>
+            <td>{{fish.Anzahl}}</td>
+            <td>{{fish.Laenge_Avg | number:2}}</td>
+            <td>{{fish.Laenge_Max | number:2}}</td> 
+            <td>{{fish.Gewicht | number:2}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
