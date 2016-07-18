@@ -1,44 +1,17 @@
 var express = require ('express');
 var app = express();
-var bodyParser = require('body-parser');
-var mongoSetup = require('./app/config/model.js');
+bodyParser = require('body-parser');
+http = require('http');
+var mongoSetup = require('./config/model.js');
 
-app.use(express.static(__dirname + "/app"));
+
+//environments
+app.set('port', process.env.port || 3000);
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
+routes = require('./routes')(app, mongoSetup);
 
-app.get('/fische', function(req,res){
-	mongoSetup.fishes.find({}, function(err,docs){
-		res.json(docs);
-		console.log("Alle Fische wurden versendet!");
-	})
+http.createServer(app).listen(app.get('port'), function(){
+	console.log("Express server listening on port " + app.get('port'));
 });
 
-app.get('/total', function(req,res){
-
-	mongoSetup.fishes.aggregate([{$group: { 
-
-			_id: "$Art",
-			Anzahl: {$sum: "$Anzahl"},
-			Laenge_Avg: {$avg: "$Laenge"},
-			Laenge_Max: {$max: "$Laenge"},
-			Gewicht:{$sum: "$Gewicht"}
-
-		}
-
-		}],	function(err,docs){
-
-		if(err){console.log(err);}
-		else {res.json(docs);
-			console.log(docs);}	
-
-	});
-
-});
-
-app.get('/*', function(req, res){
-	res.send("hallo!");
-	console.log("I received a get request from the Browser!");
-});
-
-app.listen(3000);
-console.log("Server is running on port 3000");
