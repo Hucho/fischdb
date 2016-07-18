@@ -13,5 +13,5 @@ module.exports = function(app, mongoSetup){
 		//next();
 	});
 
-	app.use('/',rootRouter);
+	app.use('/test',rootRouter);
 };
