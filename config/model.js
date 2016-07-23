@@ -1,9 +1,8 @@
 //config/model.js
+module.exports = function mongoSetup (collection){
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
-function mongoSetup (mongoose, Schema){
 
 //connect to Database
 var db = mongoose.createConnection('mongodb://localhost/fishdb');
@@ -19,7 +18,7 @@ var fish = new Schema (
 		Art: String,
 		Gewicht: Number,
 		Strecken_ID: Number,
-	}, 	{collection: 'kkr'});
+	}, collection);
 
 var model = {fishes: db.model('fishes', fish)}
 
@@ -27,4 +26,3 @@ return model;
 
 }
 
-module.exports = mongoSetup(mongoose, Schema);

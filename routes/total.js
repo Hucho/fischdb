@@ -7,7 +7,7 @@ module.exports = function(app, mongoSetup){
 	// Any generic logic can go here
 	rootRouter.use(function(req, res, next) {
 		mongoSetup.fishes.aggregate([{$group: { 
-			_id: "$Art",
+			_id: "$Fischart",
 			Anzahl: {$sum: "$Anzahl"},
 			Laenge_Avg: {$avg: "$Laenge"},
 			Laenge_Max: {$max: "$Laenge"},

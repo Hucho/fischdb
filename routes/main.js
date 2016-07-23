@@ -4,6 +4,8 @@ module.exports = function(app, mongoSetup){
 		express = require('express'),
 		rootRouter = express.Router();
 
+var mongoSetup = require('../config/model')({'collection':'svd2'});
+
 	// Any generic logic can go here
 	rootRouter.use(function(req, res, next) {
 			mongoSetup.fishes.find({}, function(err,docs){
