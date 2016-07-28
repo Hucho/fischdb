@@ -1,6 +1,7 @@
 //index route file
-module.exports = function (app, mongoSetup) {
-	require('./total')(app, mongoSetup),
-	require('./main')(app, mongoSetup)
+module.exports = function (app) {
+	require('./total')(app),
+	require('./main')(app),
+	require('./getCols')(app)
 	
 };
